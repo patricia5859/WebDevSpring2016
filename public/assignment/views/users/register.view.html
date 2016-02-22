@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="../css/dashboard.css" rel="stylesheet">
+    <link href="../../../css/dashboard.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,8 +42,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="register.html">Username</a></li>
-                <li><a href="login.html">Logout</a></li>
+                <li class="active"><a href="register.view.html">Register</a></li>
+                <li><a href="login.view.html">Login</a></li>
+                <li><a href="../home/home.view.html">Home</a></li>
+                <li><a href="../home/home.view.html">Logout</a></li>
             </ul>
             <!-- <form class="navbar-form navbar-right">
                  <input type="text" class="form-control" placeholder="Search...">
@@ -56,10 +58,10 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="home.html">Home <span class="sr-only">(current)</span></a></li>
-                <li class="active"><a href="#">Profile</a></li>
-                <li><a href="admin.html">Admin</a></li>
-                <li><a href="forms.html">Forms</a></li>
+                <li><a href="../home/home.view.html">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="profile.view.html">Profile</a></li>
+                <li><a href="../admin/admin.view.html">Admin</a></li>
+                <li><a href="../forms/forms.view.html">Forms</a></li>
             </ul>
             <!-- <ul class="nav nav-sidebar">
                  <li><a href="">Nav item</a></li>
@@ -75,30 +77,27 @@
              </ul>-->
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Profile</h1>
-            <form class="form-horizontal" action="profile.html">
+            <h1 class="page-header">Register</h1>
+
+            <form class="form-horizontal" action="profile.view.html">
                 <div class="form-group">
-                    <label for="inputUsername3" class="col-sm-2 control-label">Username:</label>
+                    <label for="inputUsername" class="col-sm-2 control-label">Username:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputUsername3" placeholder="Username">
+                        <input type="text" class="form-control" id="inputUsername" placeholder="Username">
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">Password:</label>
                     <div class="col-sm-10">
                         <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="inputFirstName3" class="col-sm-2 control-label">First Name:</label>
+                    <label for="inputVerifyPassword3" class="col-sm-2 control-label">Verify Password:</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputFirstName3" placeholder="First Name">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputLastName3" class="col-sm-2 control-label">Last Name:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputLastName3" placeholder="Last Name">
+                        <input type="password" class="form-control" id="inputVerifyPassword3" placeholder="Verify Password">
                     </div>
                 </div>
                 <div class="form-group">
@@ -107,14 +106,11 @@
                         <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
                     </div>
                 </div>
-
-
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10" >
-                        <button type="submit" class="btn btn-default" style="width: 100%">Update</button>
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button style="width: 100%" type="submit" class="btn btn-default">Register</button>
                     </div>
                 </div>
-            </form>
         </div>
     </div>
 </div>
