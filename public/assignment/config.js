@@ -1,3 +1,15 @@
-/**
- * Created by Patricia on 2/21/2016.
- */
+(function(){
+        angular
+            .module('FormBuilderApp')
+            .config(function($routeProvider){
+                $routeProvider
+                    .when("/home",{
+                        templateUrl: "views/home/home.view.html"
+                    })
+
+                    .otherwise({
+                        redirectTo: "/home"
+                    });
+            });
+
+    })();
