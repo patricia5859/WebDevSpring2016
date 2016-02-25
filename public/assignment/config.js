@@ -1,15 +1,15 @@
 (function(){
-        angular
-            .module('FormBuilderApp')
-            .config(function($routeProvider){
-                $routeProvider
-                    .when("/home",{
-                        templateUrl: "views/home/home.view.html"
-                    })
+    angular
+        .module('FormBuilderApp')
+        .config(function($routeProvider){
+            $routeProvider
+                .when("/home",{
+                    templateUrl: "views/home/home.view.html"
+                })
 
-                    .otherwise({
-                        redirectTo: "/home"
-                    });
-            });
+                .otherwise({
+                    redirectTo: "/home"
+                });
+        });
 
-    })();
+})();
