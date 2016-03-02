@@ -1,3 +1,7 @@
-/**
- * Created by Patricia on 2/21/2016.
- */
+(function(){
+    angular
+        .module('FormBuilderApp')
+        .controller('SidebarController', SidebarController);
+
+    function SidebarController(){}
+})();
