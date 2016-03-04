@@ -24,6 +24,10 @@
                     templateUrl: "views/forms/forms.view.html"
                 })
 
+                .when("/fields",{
+                    templateUrl: "views/forms/fields.view.html"
+                })
+
                 .when("/profile",{
                     templateUrl: "views/users/profile.view.html",
                     controller: "ProfileController"
