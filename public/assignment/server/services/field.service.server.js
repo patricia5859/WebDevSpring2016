@@ -16,9 +16,10 @@ function  getField(req, res){
 }
 
 function  deleteField(req, res){
+    console.log("in service.server.js");
     var formId = req.params.formId;
     var fieldId = req.params.fieldId;
-    res.json(fieldModel.deleteFieldByFormIdFieldId (formId, fieldId));
+    res.json(fieldModel.deleteField (formId, fieldId));
 
 }
 

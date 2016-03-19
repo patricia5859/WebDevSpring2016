@@ -11,7 +11,7 @@ module.exports = function(){
         getField : getField,
         getFieldById : getFieldById,
         deleteField : deleteField,
-        deleteFieldById : deleteFieldById,
+        deleteFieldByFormId : deleteFieldByFormId,
         createFieldForForm : createFieldForForm,
         updateFieldForForm : updateFieldForForm,
         updateField : updateField
@@ -94,12 +94,13 @@ module.exports = function(){
 
         for (form in forms) {
             if (forms[form]._id == formId)
-                deleteFieldById(forms[form].fields, fieldId)
+                deleteFieldByFormId(forms[form].fields, fieldId)
         }
-        return formInfo;
+        return forms;
     }
 
-    function deleteFieldById(fields, fieldId) {
+    function deleteFieldByFormId(fields, fieldId) {
+        console.log("inform.model.js");
         for (field in fields) {
             if (fields[field]._id == fieldId)
                 fields.splice(field, 1);

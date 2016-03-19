@@ -14,7 +14,7 @@
         };
         return api;
 
-        function createFieldForForm(formId, fieldId){
+        function createFieldForForm(formId, field){
             return $http.post('/api/assignment/form/'+formId+'/field', field);
         }
 
@@ -27,7 +27,8 @@
         }
 
         function deleteFieldForForm(formId, fieldId){
-            $http.delete('/api/assignment/form/'+formId+'/field/'+fieldId);
+            console.log("in service.client.js");
+            return $http.delete('/api/assignment/form/'+formId+'/field/'+fieldId);
         }
 
         function updateField(formId, fieldId, form){

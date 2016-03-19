@@ -22,7 +22,6 @@
             FormService
                 .createFormForUser(currentUser._id, form)
                 .then( function(response){
-
                 $scope.forms.push(response.data);
                 $scope.form={};
                 $scope.selIndex = null;
