@@ -34,5 +34,9 @@
             return $http.put('/api/assignment/form/'+formId+'/field/'+fieldId, form);
         }
 
+        function test(){
+
+        }
+
     }
 })();
