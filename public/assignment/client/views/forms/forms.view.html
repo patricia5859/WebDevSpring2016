@@ -19,7 +19,7 @@
                     <tr ng-repeat="form in forms"
                         ng-class="{'success' : $index == selectedFormIndex}">
                         <td>
-                            {{form.title}}
+                            <a href="#/form/{{form._id}}/fields">{{form.title}}</a>
                         </td>
 
                         <td> <a ng-click="deleteForm($index)" class="glyphicon glyphicon-remove" aria-hidden="true" color="black"></a>

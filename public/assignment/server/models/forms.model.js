@@ -7,7 +7,14 @@ module.exports = function(){
         findFormByFormId : findFormByFormId,
         createFormForUser : createFormForUser,
         deleteFormByFormId : deleteFormByFormId,
-        updateFormByFormId : updateFormByFormId
+        updateFormByFormId : updateFormByFormId,
+        getField : getField,
+        getFieldById : getFieldById,
+        deleteField : deleteField,
+        deleteFieldById : deleteFieldById,
+        createFieldForForm : createFieldForForm,
+        updateFieldForForm : updateFieldForForm,
+        updateField : updateField
 
     }
     return api;
@@ -63,5 +70,73 @@ module.exports = function(){
         return newForm;
     }
 
+    function getField(formId, fieldId){
+
+        for (form in forms){
+            if(forms[form]._id == formId)
+                if(fieldId)
+                    getFieldById(forms[form].fields, fieldId);
+                else
+                    return forms[form].fields;
+        }
+    }
+
+    function getFieldById(fields, fieldId){
+
+        for (field in fields){
+            if( fields[field]._id == fieldId)
+                return fields[field];
+        }
+
+    }
+
+    function  deleteField(formId, fieldId) {
+
+        for (form in forms) {
+            if (forms[form]._id == formId)
+                deleteFieldById(forms[form].fields, fieldId)
+        }
+        return formInfo;
+    }
+
+    function deleteFieldById(fields, fieldId) {
+        for (field in fields) {
+            if (fields[field]._id == fieldId)
+                fields.splice(field, 1);
+        }
+    }
+
+    function  createFieldForForm(formId, field){
+
+        var temp ={};
+        field._id = (new Date).getTime();
+        for (form in forms) {
+            if (forms[form]._id == formId) {
+                forms[form].fields.push(field);
+                temp = field;
+            }
+
+        }
+        return temp;
+
+    }
+
+    function updateFieldForForm(formId, fieldId, field){
+        var tempField = {};
+        for (form in forms) {
+            if (forms[form]._id == formId);
+            return updateField(forms[form].fields, fieldId, field);
+
+        }
+    }
+
+    function updateField(fields, fieldId, field){
+        for(field in fields){
+            if(fields[field]._id == fieldId) {
+                field[field] = field;
+                return field;
+            }
+        }
+    }
 
 };

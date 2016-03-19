@@ -25,7 +25,13 @@
                 })
 
                 .when("/fields",{
-                    templateUrl: "views/forms/fields.view.html"
+                    templateUrl: "views/forms/fields.view.html",
+                    controller: "FieldController"
+                })
+
+                .when("/form/:formId/fields",{
+                    templateUrl: "views/forms/fields.view.html",
+                    controller: "FieldController"
                 })
 
                 .when("/profile",{
