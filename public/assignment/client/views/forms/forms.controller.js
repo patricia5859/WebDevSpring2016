@@ -10,14 +10,20 @@
 
         function initForms(){
 
-            FormService.findAllFormsForUser(currentUser._id,function(response){
-                $scope.forms = response;
-            })
+            FormService
+                .findAllFormsForUser(currentUser._id)
+                .then(function(response){
+                    console.log(response);
+                    $scope.forms = response.data;
+            });
         }
 
         $scope.addForm = function(form){
-            FormService.createFormForUser(currentUser._id, form, function(response){
-                $scope.forms.push(response);
+            FormService
+                .createFormForUser(currentUser._id, form)
+                .then( function(response){
+
+                $scope.forms.push(response.data);
                 $scope.form={};
                 $scope.selIndex = null;
 
@@ -25,15 +31,22 @@
         };
 
         $scope.updateForm = function(form){
-            FormService.updateFormById(currentUser._id, form, function(response){
-                initForms();
+            console.log("insdie update");
+            console.log(form);
+            FormService
+                .updateFormById(form._id, form)
+                .then(function(response){
+                    initForms();
+                    $scope.form={};
             });
-            $scope.form={};
+
         };
 
 
         $scope.deleteForm = function(index){
-            FormService.deleteFormById($scope.forms[index]._id, function(response){
+            FormService
+                .deleteFormById($scope.forms[index]._id)
+                .then(function(response){
                 initForms();
             });
             $scope.form={};
