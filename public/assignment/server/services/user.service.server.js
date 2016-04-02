@@ -1,6 +1,5 @@
-var userModel = require("../models/user.model.js")();
 
-module.exports = function(app){
+module.exports = function(app,userModel){
     app.get("/api/assignment/user?username=username&password=password", getUsers);
     app.get("/api/assignment/user?username=username", getUsers);
     app.get("/api/assignment/user", getUsers);
@@ -14,8 +13,11 @@ module.exports = function(app){
 
             if (req.query.password) {
                 console.log("in user.service.server.js");
-                var user = userModel.findUserByCredentials(req.query.username, req.query.password);
-                res.json(user);
+                var user = userModel.findUserByCredentials(req.query.username, req.query.password)
+                    .then(function(user){
+                        res.json(user);
+
+                    });
             }
             else {
                 var user = userModel.findUserByUsername(req.query.username);
@@ -24,10 +26,10 @@ module.exports = function(app){
         }
 
         else{
-                var users = userModel.findAllUsers();
-                res.json(users);
-            }
+            var users = userModel.findAllUsers();
+            res.json(users);
         }
+    }
 
 
     function getProfile(req, res){
