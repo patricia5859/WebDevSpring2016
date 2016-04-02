@@ -1,6 +1,6 @@
-var fieldModel = require("../models/forms.model.server.js")();
 
-module.exports = function(app) {
+
+module.exports = function(app,formModel, fieldsModel) {
 
     app.get('/api/assignment/form/:formId/field', getField);
     app.get('/api/assignment/form/:formId/field/:fieldId', getField);
@@ -19,15 +19,41 @@ function  deleteField(req, res){
     console.log("in service.server.js");
     var formId = req.params.formId;
     var fieldId = req.params.fieldId;
-    res.json(fieldModel.deleteField (formId, fieldId));
+
+    formModel.findFormByFormId(formId)
+        .then(function(form){
+
+            fieldsModel.deleteField(fieldId)
+                .then(function (field){
+                    form.fields.id(fieldId).remove();
+                    form.save();
+                    res.json(form);
+                });
+        });
 
 }
 
 function createFieldForForm(req, res){
     var formId = req.params.formId;
     var field = req.body;
+    console.log(123);
+    console.log(formId);
+    console.log(field);
 
-    res.json(fieldModel.createFieldForForm(formId, field));
+    formModel.findFormByFormId(formId)
+        .then(function(form){
+            console.log(321);
+            console.log(form);
+
+            fieldsModel.createFieldForForm(field)
+                .then(function (field){
+
+                    form.fields.push(field);
+                    form.save();
+                    res.json(form);
+                });
+        });
+
 
 }
 

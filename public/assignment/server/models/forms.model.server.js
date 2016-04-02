@@ -50,12 +50,21 @@ module.exports = function(db, mongoose){
     }
 
     function findFormByFormId(formId){
-        for(form in forms){
+        console.log(formId);
+
+        var defer = q.defer();
+        formModel.findOne({"_id" : formId},
+            function(err, form){
+                defer.resolve(form);
+            }
+            );
+        return defer.promise;
+        /*for(form in forms){
             if(form._id==formId){
                 return form;
             }
         }
-        return null;
+        return null;*/
     }
 
     function createFormForUser(userId, form){
