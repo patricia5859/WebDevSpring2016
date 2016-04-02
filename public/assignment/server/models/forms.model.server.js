@@ -1,6 +1,10 @@
-var forms = require("./forms.mock.json");
+    var q = require("q");
 
-module.exports = function(){
+module.exports = function(db, mongoose){
+
+    var formSchema = require("./forms.schema.server.js")(mongoose);
+
+    var formModel = mongoose.model('formModel', formSchema);
 
     var api = {
         findAllFormsForUser : findAllFormsForUser,
@@ -22,13 +26,27 @@ module.exports = function(){
     function findAllFormsForUser(userId){
         console.log("model "+userId);
 
-        var formsForUser = [];
+        var defer = q.defer();
+        formModel.find({'userId' : userId},
+            function(err, forms){
+                if(err){
+                    console.log("error in find all forms");
+                }
+                else{
+                    defer.resolve(forms);
+                }
+            }
+
+        );
+
+        return defer.promise;
+        /*var formsForUser = [];
         for(form in forms){
             if(forms[form].userId == userId){
                 formsForUser.push(forms[form]);
                 console.log("in if");
         }}
-        return formsForUser;
+        return formsForUser;*/
     }
 
     function findFormByFormId(formId){
@@ -40,34 +58,94 @@ module.exports = function(){
         return null;
     }
 
-    function createFormForUser(userId, tempForm){
-        var form={};
+    function createFormForUser(userId, form){
+
+        var defer = q.defer();
+        var newForm = {};
+        newForm = form;
+        newForm.userId = userId;
+        newForm.created = (new Date).getTime();
+
+        formModel.create(newForm,
+            function(err, form){
+                if(err){
+                    console.log("form creation failed");
+                }
+                else{
+                    console.log("form created");
+                    console.log(form);
+                    defer.resolve(form);
+
+                }
+            }
+        );
+
+        return defer.promise;
+       /* var form={};
         var Id = (new Date).getTime();
         form._id = Id;
         form.userId = userId;
         form.title = tempForm.title;
         form.fields = null;
         forms.push(form);
-        return form;
+        return form;*/
     }
 
     function deleteFormByFormId(formId){
-        for(form in forms){
+        var defer = q.defer();
+        formModel.remove({'_id' : formId},
+            function(err, forms){
+                if(err){
+                    console.log("error in delete form by Id");
+                }
+                else{
+                    console.log("form del");
+                    defer.resolve(findAllFormsForUser(forms.userId));
+                }
+            }
+
+        );
+
+        return defer.promise;
+        /*for(form in forms){
             if(form._id==formId){
                 forms.splice(form,1);
                 break;
             }
-        }
+        }*/
     }
 
     function updateFormByFormId(formId, newForm){
-        for(form in forms){
+
+        var defer = q.defer();
+        delete newForm._id;
+
+        formModel.update({'_id' : formId},
+            {$set : newForm},
+            function(err, forms){
+                if(err){
+                    console.log("error in update form");
+                }
+                else{
+                    formModel.findOne({"_id" : formId},
+                        function(err, user){
+                            defer.resolve(forms);
+                        }
+
+                    );
+                }
+            }
+
+        );
+
+        return defer.promise;
+        /*for(form in forms){
             if(forms[form]._id==formId){
                 forms[form].title = newForm.title;
                 forms[form].fields = newForm.fields;
             }
         }
-        return newForm;
+        return newForm;*/
     }
 
     function getField(formId, fieldId){

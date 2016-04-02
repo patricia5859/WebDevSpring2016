@@ -1,4 +1,4 @@
-var fieldModel = require("../models/forms.model.js")();
+var fieldModel = require("../models/forms.model.server.js")();
 
 module.exports = function(app) {
 

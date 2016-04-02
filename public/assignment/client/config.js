@@ -17,7 +17,8 @@
                 })
 
                 .when("/logout",{
-                    templateUrl: "views/home/home.view.html"
+                    templateUrl: "views/home/home.view.html",
+                    controller: "LogoutController"
                 })
 
                 .when("/forms",{
