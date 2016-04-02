@@ -2,7 +2,7 @@ var q = require("q");
 var uuid = require("node-uuid");
 
 module.exports = function(db, mongoose){
-    console.log(mongoose);
+
 
     var userSchema = require("./user.schema.server.js")(mongoose);
 
@@ -97,11 +97,13 @@ module.exports = function(db, mongoose){
     function createUser(newUser){
 
         newUser._id = uuid.v1();
+        console.log(newUser);
 
         var defer = q.defer();
 
         userCollection.create(newUser,
             function(err, user){
+                console.log(user);
                 defer.resolve(user);
             }
         );
