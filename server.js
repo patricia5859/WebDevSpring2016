@@ -10,7 +10,7 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var conString = "mongodb://localhost/formCollection";
 
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
-    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+    conString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
         process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
         process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
         process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
