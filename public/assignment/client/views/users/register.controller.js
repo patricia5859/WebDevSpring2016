@@ -6,13 +6,18 @@
     function RegisterController($scope, $rootScope, $location, UserService) {
 
         $scope.register=function(user){
-            UserService.createUser(user,
-                function(response){
+
+            user.roles=[];
+            user.roles.push("admin");
+            UserService
+                .register(user)
+                .then(function(response){
                     $rootScope.user=response;
                     console.log($rootScope.user);
+                    $location.path('/profile');
                 }
-            )
-            $location.path('/profile');
+            );
+
         }
 
     }

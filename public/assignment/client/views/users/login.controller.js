@@ -6,7 +6,8 @@
     function LoginController($scope, $rootScope, $location, UserService) {
 
         $scope.login=function(user){
-            UserService.findUserByCredentials(user.username, user.password)
+            UserService
+                .login(user)
                 .then(function(response){
                     if(response.data.username==null){
                         $location.path('/login');

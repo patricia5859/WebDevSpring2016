@@ -19,11 +19,25 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 
 var db = mongoose.connect(conString);
 
+
+var passport      = require('passport');
+var cookieParser  = require('cookie-parser');
+var session       = require('express-session');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(multer());
 
+
+app.use(session({
+    secret: 'this is the secret',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 //require("./public/assignment/server/services/user.service.server.js")(app);
 //require("./public/assignment/server/services/forms.service.server.js")(app);
 //require("./public/assignment/server/services/field.service.server.js")(app);

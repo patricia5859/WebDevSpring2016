@@ -13,9 +13,9 @@ module.exports = function(db, mongoose){
         findUserByUsername : findUserByUsername,
         findAllUsers : findAllUsers,
         findUserById : findUserById,
-        createUser : createUser
+        createUser : createUser,
        // deleteUserById : deleteUserById,
-      //  updateUserById : updateUserById
+        updateUserById : updateUserById
     };
     return api;
 
@@ -47,20 +47,14 @@ module.exports = function(db, mongoose){
 
         var defer = q.defer();
 
-        userCollection.findUser(
+        userCollection.findOne(
             {'username': username},
             function(err, user){
                 defer.resolve(user);
             }
         );
         return defer.promise;
-/*        for(user in users){
-            if(user.username==username){
-                console.log(users[user]);
-                return users[user];
-            }
-        }
-        return null;*/
+
     }
 
     function findAllUsers(){
@@ -85,19 +79,13 @@ module.exports = function(db, mongoose){
 
         return defer.promise;
 
-       /* for(user in users){
-            if(user._id==Id){
-                console.log(users[user]);
-                return users[user];
-            }
-        }
-        return null;*/
+
     }
 
     function createUser(newUser){
 
-        newUser._id = uuid.v1();
-        console.log(newUser);
+
+
 
         var defer = q.defer();
 
@@ -111,30 +99,37 @@ module.exports = function(db, mongoose){
 /*        newUser._id = (new Date).getTime();
         users.push(newUser);
         return newUser;*/
-    }
+}
 
-    /*
-    function deleteUserById(Id){
-        for(user in users){
-            if(user._id==Id){
-                users.splice(user,1);
-                break;
-            }
-        }
-        return users;
-    }
 
-    function updateUserById(Id, user){
-        for(user in users){
-            if(users[user]._id == Id){
-                users[user].firstName = user.firstName;
-                users[user].lastName = user.lastName;
-                users[user].username = user.username;
-                users[user].password = user.password;
-                users[user].role = user.role;
+
+    function updateUserById(Id, user) {
+
+
+
+
+        var deferred = q.defer();
+
+
+        userCollection.update(
+            {'_id' : Id},
+            {$set : user},
+            function(err, update){
+                if(err){
+                    console.log("error updating");
+                    console.log(err);
+                    deferred.reject(err);
+                }
+                else{
+
+                    console.log("success");
+                    console.log(update);
+                    deferred.resolve(update);
+                }
             }
-        }
-        return user;
-    }
-    */
+        );
+        return deferred.promise;
+    };
+
 };
+

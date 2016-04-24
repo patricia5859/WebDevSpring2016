@@ -13,9 +13,30 @@
             findUserById : findUserById,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUserById: updateUserById
+            updateUserById: updateUserById,
+            login: login,
+            register : register,
+            searchUserByUserName: searchUserByUserName,
+            logout : logout
         };
         return api;
+
+        function logout(){
+
+            return $http.get('/api/logout');
+        }
+
+        function searchUserByUserName(username){
+            return $http.get('/api/user?flag=true&username='+username);
+        }
+
+        function register(user){
+            return $http.post('/api/register',user);
+        }
+
+        function login(user){
+            return $http.post('/api/login',user);
+        }
 
         function findUserByCredentials(username, password) {
             console.log("in user.service.client.js");
@@ -43,7 +64,7 @@
         }
 
         function updateUserById(userId, user){
-            return $http.put("/api/assignment/user"+userId,user);
+            return $http.put("/api/assignment/user/"+userId,user);
         }
     }
 })();

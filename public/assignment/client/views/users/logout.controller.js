@@ -4,9 +4,19 @@
         .module('FormBuilderApp')
         .controller('LogoutController', LogoutController);
 
-    function LoginController($scope, $rootScope, $location, UserService) {
+    function LogoutController($scope, $rootScope, $location, UserService) {
 
-        $rootScope.user = null;
-        }
+
+        UserService
+            .logout()
+            .then(function (response){
+                $rootScope.user = null;
+
+            });
+
+
+
 
     }
+
+})();
